@@ -248,9 +248,8 @@ function App() {
               </div>
             </div>
             
-            <div className="section-divider no-print"></div>
             <div className="no-print">
-              <h2 className="no-print">AI Financial Assistant</h2>
+              {/* <h2 className="no-print">AI Financial Assistant</h2> */}
               <Chatbot data={statementData} />
             </div>
 

@@ -1,5 +1,3 @@
-// src/Chatbot.js
-
 import React, { useState, useEffect, useRef } from 'react';
 
 // This function simulates the AI's logic with new advisory capabilities
@@ -18,21 +16,17 @@ const getAIResponse = (query, data) => {
   }
 
   // --- New, More Advanced AI Responses ---
-    // 1. How to improve financial profile/credit score
+  // 1. How to improve financial profile/credit score
   if (q.includes('improve my profile') || q.includes('improve my credit')) {
     const utilization = (data.total_balance / data.credit_limit) * 100;
     let advice = "Of course. Here are some general tips to improve your financial profile based on this statement:\n";
-    
-    advice += `\n- Pay On Time: Always pay at least the minimum amount by the due date (${data.payment_due_date}) to avoid late fees and negative marks on your credit report.`; 
-    
+    advice += `\n- Pay On Time: Always pay at least the minimum amount by the due date (${data.payment_due_date}) to avoid late fees and negative marks on your credit report.`;
     if (utilization > 30) {
-      advice += `\n- Lower Credit Utilization: Your credit utilization is currently around ${utilization.toFixed(0)}%. Lenders prefer to see this below 30%. Paying down your balance can significantly improve your credit score.`;  
+      advice += `\n- Lower Credit Utilization: Your credit utilization is currently around ${utilization.toFixed(0)}%. Lenders prefer to see this below 30%. Paying down your balance can significantly improve your credit score.`;
     } else {
-      advice += `\n- Maintain Low Credit Utilization: Your credit utilization is excellent at around ${utilization.toFixed(0)}%. Keeping it below 30% is great for your credit score.`; 
+      advice += `\n- Maintain Low Credit Utilization: Your credit utilization is excellent at around ${utilization.toFixed(0)}%. Keeping it below 30% is great for your credit score.`;
     }
-    
     advice += "\n- Review Your Spending: Regularly check your transactions for accuracy and to understand your spending habits. This can help you find areas to save.";
-    
     return advice;
   }
 
@@ -61,11 +55,7 @@ const getAIResponse = (query, data) => {
 
   // 4. Suggest ways to save money
   if (q.includes('how can i save') || q.includes('save money')) {
-    const topExpenses = data.transactions
-      .filter(tx => tx.amount < 0) // Only expenses
-      .sort((a, b) => a.amount - b.amount) // Sort by most negative
-      .slice(0, 2); // Get the top 2
-
+    const topExpenses = data.transactions.filter(tx => tx.amount < 0).sort((a, b) => a.amount - b.amount).slice(0, 2);
     return `A good way to start saving is by looking at your top spending areas. This month, your biggest expenses were:\n\n1. "${topExpenses[0].description}" ($${Math.abs(topExpenses[0].amount).toFixed(2)})\n2. "${topExpenses[1].description}" ($${Math.abs(topExpenses[1].amount).toFixed(2)})\n\nCould you reduce spending in these categories?`;
   }
   
@@ -79,24 +69,15 @@ const getAIResponse = (query, data) => {
       }
   }
   
-    // 6. Summarize a specific category (CORRECTED AND IMPROVED)
+  // 6. Summarize a specific category (CORRECTED AND IMPROVED)
   if (q.includes('spending on') || q.includes('spend on') || q.includes('summary for')) {
-    // This simpler regex robustly captures the category name at the end of the sentence.
     const categoryMatch = q.match(/(?:on|for)\s+([\w\s&]+)$/);
-
     if (categoryMatch && categoryMatch[1]) {
       const category = categoryMatch[1].trim();
-      const categoryTxs = data.transactions.filter(tx => 
-        tx.category && tx.category.toLowerCase().includes(category)
-      );
-
+      const categoryTxs = data.transactions.filter(tx => tx.category && tx.category.toLowerCase().includes(category));
       if (categoryTxs.length > 0) {
         const total = categoryTxs.reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
-        
-        const largestPurchase = categoryTxs.reduce((largest, current) => {
-          return Math.abs(current.amount) > Math.abs(largest.amount) ? current : largest;
-        }, { amount: 0, description: 'N/A' });
-
+        const largestPurchase = categoryTxs.reduce((largest, current) => Math.abs(current.amount) > Math.abs(largest.amount) ? current : largest, { amount: 0, description: 'N/A' });
         return `You had ${categoryTxs.length} transactions in the "${category}" category, totalling $${total.toFixed(2)}. Your largest purchase was for "${largestPurchase.description}".`;
       } else {
         return `I couldn't find any spending for the category "${category}" in this statement.`;
@@ -104,15 +85,12 @@ const getAIResponse = (query, data) => {
     }
   }
 
-
-
-
   // --- Fallback Response ---
   return "I'm not quite sure how to answer that. Try asking things like 'How can I improve my profile?', 'What is my credit utilization?', or 'Suggest ways to save money'.";
 };
 
-
 const Chatbot = ({ data }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { text: "Hello! Ask me for financial advice or questions about your statement.", sender: 'bot' }
   ]);
@@ -127,11 +105,9 @@ const Chatbot = ({ data }) => {
 
   const handleSendMessage = (text) => {
     if (!text.trim()) return;
-
     const newMessages = [...messages, { text, sender: 'user' }];
     setMessages(newMessages);
     setInputValue('');
-
     setTimeout(() => {
       const botResponse = getAIResponse(text, data);
       setMessages([...newMessages, { text: botResponse, sender: 'bot' }]);
@@ -142,32 +118,53 @@ const Chatbot = ({ data }) => {
       handleSendMessage(suggestion);
   }
 
+  const toggleChat = () => {
+    setIsOpen(!isOpen);
+  };
+
+  if (!data) return null;
+
   return (
-    <div className="chatbot-container">
-      <div className="messages-container">
-        {messages.map((msg, index) => (
-          <div key={index} className={`message ${msg.sender}-message`}>
-            {/* Using pre-wrap to respect newlines in the response */}
-            <div style={{ whiteSpace: 'pre-wrap' }}>{msg.text}</div>
+    <>
+      {!isOpen && (
+        <div className="chat-bubble" onClick={toggleChat}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" className="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+            <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+          </svg>
+        </div>
+      )}
+
+      {isOpen && (
+        <div className="chatbot-container floating">
+          <div className="chat-header">
+            <h3>AI Financial Assistant</h3>
+            <button className="close-chat-btn" onClick={toggleChat}>&times;</button>
           </div>
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
-       <div className="suggestion-chips">
-          <button onClick={() => handleSuggestionClick("How can I improve my profile?")}>Improve Profile?</button>
-          <button onClick={() => handleSuggestionClick("What is my credit utilization?")}>Credit Utilization?</button>
-          <button onClick={() => handleSuggestionClick("How can I save money?")}>Ways to Save?</button>
-      </div>
-      <form className="chat-input-form" onSubmit={(e) => { e.preventDefault(); handleSendMessage(inputValue); }}>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          placeholder="Ask for financial advice..."
-        />
-        <button type="submit">Send</button>
-      </form>
-    </div>
+          <div className="messages-container">
+            {messages.map((msg, index) => (
+              <div key={index} className={`message ${msg.sender}-message`}>
+                <div style={{ whiteSpace: 'pre-wrap' }}>{msg.text}</div>
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+          <div className="suggestion-chips">
+            <button onClick={() => handleSuggestionClick("How can I improve my profile?")}>Improve Profile?</button>
+            <button onClick={() => handleSuggestionClick("What is my credit utilization?")}>Credit Utilization?</button>
+            <button onClick={() => handleSuggestionClick("How can I save money?")}>Ways to Save?</button>
+          </div>
+          <form className="chat-input-form" onSubmit={(e) => { e.preventDefault(); handleSendMessage(inputValue); }}>
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder="Ask for financial advice..."
+            />
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      )}
+    </>
   );
 };
 
