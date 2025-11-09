@@ -230,7 +230,7 @@ function App() {
                 <div className="results-actions">
                     <button className="action-btn" onClick={handleSaveClick}>Save to Profile</button>
                     <button className="action-btn reminder-btn" onClick={handleSetReminder}>Set Email Reminder</button>
-                    <button className="action-btn" onClick={handlePrintClick}>Customize & Print PDF</button>
+                    <button className="action-btn" onClick={handlePrintClick}>Print PDF</button>
                 </div>
             </div>
 
