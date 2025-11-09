@@ -1,0 +1,539 @@
+.App {
+  text-align: center;
+  color: #333;
+  padding: 2rem;
+}
+
+.app-header {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.app-header p {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: #7f8c8d;
+}
+
+.upload-area {
+  background: #ffffff;
+  border: 2px dashed #3498db;
+  border-radius: 12px;
+  padding: 3rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 2rem;
+}
+
+.upload-area:hover {
+  background-color: #f8f9fa;
+}
+
+.upload-icon {
+  font-size: 3rem;
+  color: #3498db;
+}
+
+.upload-text {
+  margin-top: 1rem;
+  color: #34495e;
+  font-weight: 500;
+}
+
+.file-name {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #2ecc71;
+}
+
+.loading-spinner {
+  margin-top: 2rem;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.results-card {
+  margin-top: 2rem;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.results-card h2 {
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.data-point {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+.data-point strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #34495e;
+}
+
+.data-point span {
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+.total-balance span {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.section-divider {
+  border-top: 1px solid #ecf0f1;
+  margin: 2.5rem 0;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.transactions-table th,
+.transactions-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.transactions-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.transactions-table tbody tr:hover {
+  background-color: #f1f2f6;
+}
+
+.credit-amount {
+  color: #27ae60;
+  font-weight: 500;
+}
+
+.debit-amount {
+  color: #c0392b;
+}
+
+.chart-container {
+  height: 300px; 
+  position: relative;
+  margin: 1rem 0;
+}
+
+/* Add to the bottom of src/App.css */
+
+.chatbot-container {
+  border: 1px solid #ecf0f1;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  overflow: hidden;
+}
+
+.messages-container {
+  flex-grow: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.message {
+  padding: 10px 15px;
+  border-radius: 18px;
+  margin-bottom: 10px;
+  max-width: 80%;
+  line-height: 1.5;
+}
+
+.user-message {
+  background-color: #3498db;
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.bot-message {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  align-self: flex-start;
+}
+
+.suggestion-chips {
+    padding: 10px 1.5rem;
+    background-color: #f4f6f8;
+    border-top: 1px solid #ecf0f1;
+}
+
+.suggestion-chips button {
+    background: #e0e6ed;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #34495e;
+    transition: background-color 0.3s;
+}
+
+.suggestion-chips button:hover {
+    background: #c8d1db;
+}
+
+.chat-input-form {
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid #ecf0f1;
+}
+
+.chat-input-form input {
+  flex-grow: 1;
+  border: 1px solid #bdc3c7;
+  padding: 12px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.chat-input-form button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.chat-input-form button:hover {
+  background-color: #2980b9;
+}
+
+/* src/App.css */
+
+:root {
+  --bg-color: #f0f2f5;
+  --card-bg-color: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --border-color: #ecf0f1;
+  --accent-color: #3498db;
+  --hover-bg-color: #f8f9fa;
+  --table-header-bg: #f8f9fa;
+}
+
+body.dark {
+  --bg-color: #1a1a1a;
+  --card-bg-color: #2c2c2c;
+  --text-primary: #ecf0f1;
+  --text-secondary: #bdc3c7;
+  --border-color: #3e3e3e;
+  --accent-color: #5dade2;
+  --hover-bg-color: #343434;
+  --table-header-bg: #343434;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app-container {
+  padding: 2rem;
+}
+
+.app-header {
+  background-color: var(--card-bg-color);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 2rem auto;
+  transition: background-color 0.3s;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: var(--text-primary);
+}
+
+.app-header p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+/* Theme switcher styles */
+.theme-switcher {
+  display: flex;
+  align-items: center;
+}
+.theme-switcher span {
+  margin-right: 10px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; }
+.slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; }
+input:checked + .slider { background-color: var(--accent-color); }
+input:checked + .slider:before { transform: translateX(22px); }
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }
+
+/* ... (Keep existing styles, but ensure they use vars) ... */
+
+.upload-area {
+  background: var(--card-bg-color);
+  border: 2px dashed var(--accent-color);
+  /* ... */
+}
+.upload-area:hover { background-color: var(--hover-bg-color); }
+.upload-text { color: var(--text-secondary); }
+
+.results-card {
+  background: var(--card-bg-color);
+  /* ... */
+}
+.results-card h2 { color: var(--text-primary); border-bottom: 2px solid var(--border-color); }
+
+.data-point { background-color: var(--hover-bg-color); border-left: 4px solid var(--accent-color); }
+.data-point strong { color: var(--text-secondary); }
+.data-point span { color: var(--text-primary); }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.export-btn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+.export-btn:hover { background-color: #2980b9; }
+
+.transactions-table th { background-color: var(--table-header-bg); }
+.transactions-table th, .transactions-table td { border-bottom: 1px solid var(--border-color); }
+.transactions-table tbody tr:hover { background-color: var(--hover-bg-color); }
+
+/* Update Chatbot styles to use variables */
+.chatbot-container { border: 1px solid var(--border-color); }
+.messages-container { background-color: var(--bg-color); }
+.bot-message { background-color: var(--hover-bg-color); color: var(--text-primary); }
+.suggestion-chips { background-color: var(--card-bg-color); border-top: 1px solid var(--border-color); }
+.suggestion-chips button { background: var(--bg-color); color: var(--text-primary); }
+.suggestion-chips button:hover { background: #c8d1db; }
+.chat-input-form { border-top: 1px solid var(--border-color); }
+.chat-input-form input { background-color: var(--bg-color); color: var(--text-primary); border: 1px solid var(--border-color); }
+
+
+/* src/App.css */
+
+/* ... (keep all the previous CSS variables and styles) ... */
+
+.transaction-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-input {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 10px 15px;
+  border-radius: 8px;
+  width: 250px;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+/* Print-specific styles */
+@media print {
+  body {
+    background-color: #ffffff; /* Always print with a white background */
+  }
+
+  .app-container {
+    padding: 0;
+  }
+  
+  .app-header {
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .results-card {
+    box-shadow: none;
+    border: none;
+    margin-top: 0;
+  }
+
+  .no-print, .no-print * {
+    display: none !important; /* Hide any element with this class when printing */
+  }
+
+  h1, h2 {
+    color: #000000 !important; /* Ensure text is black for printing */
+  }
+
+  .section-divider {
+    border-color: #cccccc;
+  }
+
+  .chart-container {
+    height: 350px; /* Give chart adequate space on paper */
+    page-break-inside: avoid;
+  }
+
+  .transactions-table {
+    page-break-before: auto;
+    page-break-inside: auto;
+  }
+}
+
+/* Add to the bottom of src/App.css */
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--card-bg-color);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: var(--text-primary);
+}
+
+.print-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.print-options label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.print-options input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btn-secondary {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+.btn-primary { background-color: var(--accent-color); color: white; border: none; }
+.btn-secondary, .btn-primary { padding: 10px 20px; border-radius: 8px; font-weight: 500; cursor: pointer; }
+
+/* Update print media query */
+@media print {
+  /* ... (existing print styles) ... */
+
+  .print-hidden {
+    display: none !important;
+  }
+}
+  
