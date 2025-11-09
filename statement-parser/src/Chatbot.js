@@ -18,8 +18,6 @@ const getAIResponse = (query, data) => {
   }
 
   // --- New, More Advanced AI Responses ---
-
-  // 1. How to improve financial profile/credit score
     // 1. How to improve financial profile/credit score
   if (q.includes('improve my profile') || q.includes('improve my credit')) {
     const utilization = (data.total_balance / data.credit_limit) * 100;
