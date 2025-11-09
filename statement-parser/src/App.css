@@ -537,3 +537,229 @@ input:checked + .slider:before { transform: translateX(22px); }
   }
 }
   
+
+/* Add to the bottom of src/App.css */
+
+/* Login Page Styles */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.login-box {
+  background: var(--card-bg-color);
+  padding: 3rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 500px;
+}
+.login-box h2 {
+  color: var(--text-primary);
+}
+.login-input {
+  width: 100%;
+  padding: 14px;
+  margin: 1rem 0;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-primary);
+  font-size: 16px;
+}
+.login-button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--accent-color);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.login-button:hover { background-color: #2980b9; }
+
+/* Header and Profile Styles */
+.header-top {
+  align-items: flex-start;
+}
+.profile-info h2 {
+  margin: 0;
+  color: var(--text-primary);
+}
+.profile-info span {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.logout-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* History Section Styles */
+.history-section {
+  background: var(--bg-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+.history-section h3 { margin-top: 0; color: var(--text-secondary); }
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.history-item {
+  background: var(--card-bg-color);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.load-btn {
+  background: none;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Other UI Tweaks */
+.results-actions { display: flex; gap: 1rem; }
+.action-btn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Add to the bottom of src/App.css */
+
+.auth-toggle {
+  margin-top: 1.5rem;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.auth-toggle button {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+}
+
+/* Add to the bottom of src/App.css */
+
+.auth-modal {
+  padding-top: 3rem;
+}
+.auth-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.auth-modal input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-primary);
+}
+.auth-modal button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+/* Add to the end of src/App.css */
+.auth-modal {
+  padding-top: 3rem;
+}
+.auth-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.auth-modal input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-primary);
+}
+.auth-modal button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.auth-toggle {
+  margin-top: 1.5rem;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.auth-toggle button {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+}
+
+
