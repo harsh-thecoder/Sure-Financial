@@ -4,7 +4,8 @@ import './App.css';
 import SpendingChart from './SpendingChart';
 import Chatbot from './Chatbot';
 import PrintModal from './PrintModal';
-import AuthModal from './AuthModal'; // We will create this new component
+import AuthModal from './AuthModal';
+import ReminderModal from './ReminderModal'; // The new reminder modal
 
 // Expanded hardcoded data with more details, including a transaction list
 const detailedHardcodedData = {
@@ -52,6 +53,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [userHistory, setUserHistory] = useState([]);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  
+  // New state for the reminder modal
+  const [isReminderModalOpen, setIsReminderModalOpen] = useState(false);
 
   // --- Effects ---
   useEffect(() => {
@@ -70,7 +74,7 @@ function App() {
       const history = JSON.parse(localStorage.getItem(`history_${currentUser}`)) || [];
       setUserHistory(history);
     } else {
-      setUserHistory([]); // Clear history if user logs out
+      setUserHistory([]);
     }
   }, [currentUser]);
 
@@ -79,14 +83,13 @@ function App() {
     if (currentUser) {
       saveStatementToHistory();
     } else {
-      setIsAuthModalOpen(true); // Open login/signup modal if not logged in
+      setIsAuthModalOpen(true);
     }
   };
 
   const onLoginSuccess = (username) => {
     setCurrentUser(username);
     setIsAuthModalOpen(false);
-    // Automatically save the statement after successful login/signup
     setTimeout(() => {
       saveStatementToHistory(username);
     }, 100);
@@ -115,6 +118,7 @@ function App() {
     }
   };
   
+  // --- UI and Feature Handlers ---
   const toggleTheme = () => setTheme(current => (current === 'light' ? 'dark' : 'light'));
 
   const handleFileChange = (event) => {
@@ -154,6 +158,11 @@ function App() {
     setTimeout(() => window.print(), 100);
   };
 
+  const handleSetReminder = () => {
+    if (!statementData) return;
+    setIsReminderModalOpen(true);
+  };
+
   const filteredTransactions = statementData?.transactions.filter(tx =>
     tx.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -162,6 +171,9 @@ function App() {
     <div className={`app-container ${theme}`}>
       {isAuthModalOpen && <AuthModal onClose={() => setIsAuthModalOpen(false)} onLoginSuccess={onLoginSuccess} />}
       {isPrintModalOpen && <PrintModal onClose={() => setIsPrintModalOpen(false)} onConfirm={handleConfirmPrint} initialConfig={printConfig} />}
+     {isReminderModalOpen && <ReminderModal onClose={() => setIsReminderModalOpen(false)} statementData={statementData} userEmail={JSON.parse(localStorage.getItem('users'))[currentUser]?.email || 'you@example.com'} />}
+
+
       <div className="app-header">
         <div className="header-top">
           <div className="profile-info">
@@ -217,6 +229,7 @@ function App() {
                 <h2>Extracted Information</h2>
                 <div className="results-actions">
                     <button className="action-btn" onClick={handleSaveClick}>Save to Profile</button>
+                    <button className="action-btn reminder-btn" onClick={handleSetReminder}>Set Email Reminder</button>
                     <button className="action-btn" onClick={handlePrintClick}>Customize & Print PDF</button>
                 </div>
             </div>

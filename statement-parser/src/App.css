@@ -762,4 +762,41 @@ input:checked + .slider:before { transform: translateX(22px); }
   font-size: 14px;
 }
 
+/* Add to the bottom of src/App.css */
+
+.reminder-btn {
+  background-color: #2ecc71; /* A green color for notifications */
+}
+.reminder-btn:hover {
+  background-color: #27ae60;
+}
+
+.reminder-modal h3 {
+  text-align: center;
+  color: var(--accent-color);
+}
+.email-simulation {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  text-align: left;
+}
+.email-simulation hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 1rem 0;
+}
+.email-simulation ul {
+  list-style: none;
+  padding: 0;
+}
+.email-simulation li {
+  background-color: var(--card-bg-color);
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
 
